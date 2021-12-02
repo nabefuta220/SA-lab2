@@ -4,7 +4,7 @@ import pandas as pd
 from sklearn.decomposition import PCA
 
 
-def pca(data: pd.DataFrame, title: str):
+def pc_analyze(data: pd.DataFrame, title: str):
     """
     主成分分析を行う
 
@@ -40,8 +40,8 @@ def pca(data: pd.DataFrame, title: str):
 
     # 固有ベクトルの第一主成分、第二主成分の寄与度を見る
     fig = plt.figure(figsize=(6, 6))
-    for x, y, name in zip(pca.components_[0], pca.components_[1], data.columns[1:]):
-        plt.text(x, y, name)
+    for x_axis, y_axis, name in zip(pca.components_[0], pca.components_[1], data.columns[1:]):
+        plt.text(x_axis, y_axis, name)
     plt.scatter(pca.components_[0], pca.components_[1], alpha=0.8)
     plt.grid()
     plt.xlabel("PC1")
