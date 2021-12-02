@@ -8,12 +8,15 @@ python3.9
 
 (これ以降のモジュールは`pipenv update`でダウンロードできます)
 
-
 - pandas
 - matplotlib
 - cogapp
 - scipy
-- scikit-learn 
+- scikit-learn
+
+## ファイルのエンコーディングについて
+
+`output/pokemon.txt`,`output/seiseki.txt`については、shift-jisで読み込むことができたが、`output/baseball.txt`については、shift-jisでエンコーディングしても、エラーが出たため、UTF-8でエンコーディングしている。
 
 ## 1
 
