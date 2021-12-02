@@ -18,6 +18,6 @@ if __name__ == '__main__':
     command = ['pipenv', 'run']+str
     cp = subprocess.run(command, encoding='utf-8', stdout=subprocess.PIPE)
 
-    with open(out_file, 'w') as f:
-        f.write(f"$ {' '.join(command)}\n")
-        f.write(cp.stdout)
+    with open(out_file, 'w', encoding='UTF-8') as out_file:
+        out_file.write(f"$ {' '.join(command)}\n")
+        out_file.write(cp.stdout)
