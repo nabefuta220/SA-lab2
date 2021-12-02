@@ -1,4 +1,6 @@
-
+"""
+プログラム実行時の根幹部分
+"""
 
 from src.read_data import read_file
 
