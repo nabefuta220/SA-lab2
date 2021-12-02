@@ -16,7 +16,8 @@ if __name__ == '__main__':
     out_file = f"output/{os.path.splitext(os.path.basename(str[1]))[0]}.txt"
     print(out_file)
     command = ['pipenv', 'run']+str
-    cp = subprocess.run(command, encoding='utf-8', stdout=subprocess.PIPE)
+    cp = subprocess.run(command, encoding='utf-8',
+                        stdout=subprocess.PIPE, check=True)
 
     with open(out_file, 'w', encoding='UTF-8') as out_file:
         out_file.write(f"$ {' '.join(command)}\n")
