@@ -26,6 +26,13 @@ def pc_analyze(data: pd.DataFrame, title: str):
     pca.fit(data_std)
     feat = pca.transform(data_std)
 
+    #主成分得点を取得する
+    score = pd.DataFrame(feat, columns=[f"PC{x+1}"
+                                        for x in range(len(data_std.columns))])
+    print(f"score:\n{score}")
+    #主成分をcsvにまとめる
+    score.to_csv(f'output/{title}_score.csv', index=True)
+
     # 固有値、寄与率、累積寄与率をまとめる
     state = pd.DataFrame([pca.explained_variance_, pca.explained_variance_ratio_, list(np.cumsum(
         pca.explained_variance_ratio_))],
