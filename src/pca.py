@@ -1,3 +1,6 @@
+"""
+主成分分析を行う
+"""
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
@@ -25,7 +28,9 @@ def pc_analyze(data: pd.DataFrame, title: str):
 
     # 固有値、寄与率、累積寄与率をまとめる
     state = pd.DataFrame([pca.explained_variance_, pca.explained_variance_ratio_, list(np.cumsum(
-        pca.explained_variance_ratio_))], columns=[f"PC{i+1}" for i in range(len(data_std.columns))], index=['eigenvalue', 'contribution', 'contributioin_sum']).T
+        pca.explained_variance_ratio_))],
+        columns=[f"PC{i+1}" for i in range(len(data_std.columns))],
+        index=['eigenvalue', 'contribution', 'contributioin_sum']).T
     print(f"states:\n{state}")
 
     # 第一主成分、第二主成分でプロットする
