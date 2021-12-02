@@ -3,11 +3,11 @@
 """
 
 
-def split_tab(str):
+def split_tab(data):
     """
     文字列をタブ区切りに分割する
     """
-    return str.split('\t')
+    return data.split('\t')
 
 
 def read_file(file, encoding):
@@ -28,6 +28,6 @@ def read_file(file, encoding):
     """
     # baseball.txtでは、shift-jisでもデコードエラーがでされたため、UTF-8で読み込む
     with open(file, 'r', encoding=encoding) as file_obj:
-        str = file_obj.read()
-        str = list(map(split_tab, str.split("\n")))
-    return str
+        data = file_obj.read()
+        data = list(map(split_tab, data.split("\n")))
+    return data
