@@ -29,7 +29,7 @@ def pc_analyze(data: pd.DataFrame, title: str):
     #主成分得点を取得する
     score = pd.DataFrame(feat, columns=[f"PC{x+1}"
                                         for x in range(len(data_std.columns))])
-    print(f"score:\n{score}")
+    print(f"score:\n{score.head()}")
     #主成分をcsvにまとめる
     score.to_csv(f'output/{title}_score.csv', index=True)
 
