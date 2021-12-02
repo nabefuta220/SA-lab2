@@ -12,5 +12,4 @@ if __name__ == "__main__":
     # 欠損値が含まれる行を削除
     data = data.dropna(axis=0).astype('float64')
     print(f"data:\n{data.head()}")
-    
     pca(data, 'score')
