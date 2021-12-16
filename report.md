@@ -34,11 +34,11 @@ python3.9
 
 今回、入力に使ったデータ、主成分得点、固有値・寄与率・累積寄与率、固有ベクトルを順に示す。
 
-[source code](seiseki-analize.py)
+[source code](seiseki_analize.py)
 
 <!-- [[[cog
 import cog
-file="output/seiseki-analize.txt"
+file="output/seiseki_analize.txt"
 cog.outl("\n```bash")
 with open(file,"r") as f:
     cog.outl(f.read())
@@ -46,7 +46,7 @@ cog.outl("```")
     ]]] -->
 
 ```bash
-$ pipenv run python3 seiseki-analize.py
+$ pipenv run python3 seiseki_analize.py
 data:
    kokugo  shakai  sugaku   rika  ongaku  bijutu  taiiku  gika  eigo
 0    30.0    43.0    51.0   63.0    60.0    66.0    37.0  44.0  20.0
@@ -109,11 +109,11 @@ PC5 -0.301468 -0.086651 -0.061124  ...  0.268566  0.189814 -0.338372
 
 今回、入力に使ったデータ、主成分得点、固有値・寄与率・累積寄与率、固有ベクトルを順に示す。
 
-[source code](baseball-analize.py)
+[source code](baseball_analize.py)
 
 <!-- [[[cog
 import cog
-file="output/baseball-analize.txt"
+file="output/baseball_analize.txt"
 cog.outl("\n```bash")
 with open(file,"r") as f:
     cog.outl(f.read())
@@ -121,7 +121,7 @@ cog.outl("```")
     ]]] -->
 
 ```bash
-$ pipenv run python3 baseball-analize.py
+$ pipenv run python3 baseball_analize.py
 data:
       打率    得点     安打   二塁打  三塁打   本塁打  ...  故意四   死球     三振   併殺打    長打率    出塁率
 0  0.258  42.0  121.0  24.0  2.0  13.0  ...  2.0  2.0   80.0  18.0  0.401  0.293
@@ -207,12 +207,12 @@ PC5  0.213120 -0.120932 -0.152222  ... -0.401107  0.049583  0.360667
 
 今回、入力に使ったデータ、主成分得点、固有値・寄与率・累積寄与率、固有ベクトルを順に示す。
 
-[source code](pokemon-analize.py)
+[source code](pokemon_analize.py)
 
 
 <!-- [[[cog
 import cog
-file="output/pokemon-analize.txt"
+file="output/pokemon_analize.txt"
 cog.outl("\n```bash")
 with open(file,"r") as f:
     cog.outl(f.read())
@@ -220,7 +220,7 @@ cog.outl("```")
     ]]] -->
 
 ```bash
-$ pipenv run python3 pokemon-analize.py
+$ pipenv run python3 pokemon_analize.py
 data:
    attack  base_egg_steps  base_happiness  ...  sp_attack  sp_defense  speed
 0    49.0          5120.0            70.0  ...       65.0        65.0   45.0
