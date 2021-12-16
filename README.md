@@ -1,6 +1,6 @@
 # SA-lab1
 
-統計分析法　第2回演習
+統計分析法 第2回演習
 
 ## 使用方法
 
@@ -24,7 +24,7 @@
   
   outputに標準出力を保存するときに使うファイルでる。
   `python3 issuer.py python3 (ファイル名)`で実行できます。
-- task?-?.py
+- ?_analize.py
   
   各演習のプログラムです。
   `pipenv run python3 (ファイル名)`で実行できます。
