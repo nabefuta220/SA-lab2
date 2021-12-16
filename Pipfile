@@ -7,9 +7,7 @@ name = "pypi"
 pandas = "*"
 matplotlib = "*"
 cogapp = "*"
-scipy = "*"
 scikit-learn = "*"
-seaborn = "*"
 
 [dev-packages]
 

@@ -1,8 +1,8 @@
-# 統計分析法　第一回レポート
+# 統計分析法 第二回レポート
 
 ## 実行環境
 
-python3.9
+python3.9.9
 
 - pipenv
 
@@ -10,13 +10,11 @@ python3.9
 
 - pandas
 - matplotlib
-- cogapp
-- scipy
 - scikit-learn
 
 ## ファイルのエンコーディングについて
 
-`output/pokemon.txt`,`output/seiseki.txt`については、shift-jisで読み込むことができたが、`output/baseball.txt`については、shift-jisでエンコーディングしても、エラーが出たため、UTF-8でエンコーディングしている。
+`output/pokemon.txt`、`output/seiseki.txt`については、shift-jisで読み込むことができたが、`output/baseball.txt`については、shift-jisでエンコーディングしてもエラーが出たため、UTF-8でエンコーディングしている。
 
 ## 主成分分析の流れについて
 
@@ -24,23 +22,25 @@ python3.9
 
 データについては、比例尺度を取り出した後、標準化して渡している。
 
-また、固有値、寄与率はぞれぞれ、`sklearn.decomposition.PCA.explained_variance`,`sklearn.decomposition.PCA.explained_variance_ratio`を用いて取得し、累積寄与率は、`numpy.cumsum()`を使って、計算した。
+また、固有値、寄与率はぞれぞれ、`sklearn.decomposition.PCA.explained_variance`、`sklearn.decomposition.PCA.explained_variance_ratio`を用いて取得し、累積寄与率は、`numpy.cumsum()`を使って、計算した。
+
+[主成分分析を行うプログラムのソースコード](src/pca.py)
 
 ## 中学生の成績データの分析
 
-成績のデータは、すべて比例尺度であるため、すべてのデータを主成分分析に用いた。
+成績のデータはすべて比例尺度であるため、すべてのデータを主成分分析に用いた。
 
 #### 実行結果
 
-今回、入力に使ったデータ、主成分得点、固有値・寄与率・累積寄与率、固有ベクトルを順に示す。
+ソースコード、固有値・寄与率・累積寄与率、主成分得点、固有ベクトルをそれぞれ示す。
 
-[source code](seiseki_analize.py)
+[ソースコード](seiseki_analize.py)
 
 <!-- [[[cog
 import cog
 file="output/seiseki_analize.txt"
 cog.outl("\n```bash")
-with open(file,"r") as f:
+with open(file、"r") as f:
     cog.outl(f.read())
 cog.outl("```")
     ]]] -->
@@ -91,31 +91,35 @@ PC5 -0.301468 -0.086651 -0.061124  ...  0.268566  0.189814 -0.338372
 
 [固有ベクトルのすべてのデータ](output/score_component.csv)
 
-また、各生徒と各科目を第一・第二主成分でプロットしたものを順に示す。
+また、各生徒と各科目を第一・第二主成分でプロットしたものをそれぞれ図1、図2に示す。
 
 ![distribute](output/score_distribute.png)
 
+図1 : 各生徒の成績について第一・第二主成分でプロットしたもの
+
 ![heatvector](output/score_heatvector.png)
 
-科目と主成分との関係を見ると、`音楽`、`数学`、`社会`など、日頃の予習・復習が必要な科目が第一主成分の係数が大きく、`技術・家庭`、`音楽`など、単語の暗記が多く必要な科目が第二主成分と係数が大きくなっている。
+図2 : 各科目について第一・第二主成分でプロットしたもの
 
-そのことから、中学生のテストの成績の第一主成分は日頃の演習、第二主成分は物覚えのよさだと考える。
+科目と主成分との関係を見ると、`音楽`、`数学`、`社会`など、日頃の予習・復習が必要な科目の第一主成分の係数が大きく、`技術・家庭`、`音楽`など、単語の暗記が多く必要な科目の第二主成分の係数が大きくなっている。
+
+そのことから、中学生のテストの成績を決める要素の第一主成分は日頃の演習、第二主成分は物覚えのよさだと考える。
 
 ## プロ野球の個人成績の分析
 
-打撃成績のデータには、まず、名義尺度として、`選手`、`チーム`が、他の比例尺度に大きく関係する変数として`打席`、`試合`、`打数`、`塁打`が含まれるため、それらのデータを除外して主成分分析を行った。
+打撃成績のデータには、名義尺度として、`選手`、`チーム`が、他の比例尺度に大きく関係する変数として`打席`、`試合`、`打数`、`塁打`が含まれるため、それらのデータを除外して主成分分析を行った。
 
 #### 実行結果
 
-今回、入力に使ったデータ、主成分得点、固有値・寄与率・累積寄与率、固有ベクトルを順に示す。
+ソースコード、固有値・寄与率・累積寄与率、主成分得点、固有ベクトルをそれぞれ示す。
 
-[source code](baseball_analize.py)
+[ソースコード](baseball_analize.py)
 
 <!-- [[[cog
 import cog
 file="output/baseball_analize.txt"
 cog.outl("\n```bash")
-with open(file,"r") as f:
+with open(file、"r") as f:
     cog.outl(f.read())
 cog.outl("```")
     ]]] -->
@@ -177,19 +181,29 @@ PC5  0.213120 -0.120932 -0.152222  ... -0.401107  0.049583  0.360667
 
 [固有ベクトルのすべてのデータ](output/baseball_component.csv)
 
-また、各選手と各成績を第一・第二主成分でプロットしたものを順に示す。
+また、各選手の成績と各成績を第一・第二主成分でプロットしたものをそれぞれ図3、図4に示す。
 
 ![distribute](output/baseball_distribute.png)
 
+図3 : 各選手の成績について第一・第二主成分でプロットしたもの
+
 ![heatvector](output/baseball_heatvector.png)
 
-成績と主成分との関係を見ると、`出塁率`、`盗塁`、`打点`など、足が必要な成績がが第一主成分の係数が大きく、`本塁打`、`二塁打`など、パワーが必要が成績が第二主成分の係数が大きくなっている。
+図4 : 各成績について第一・第二主成分でプロットしたもの
 
-そのことから、野球選手の成績の第一主成分は足の速さ、第二主成分はパワーだと考える。
+成績と主成分との関係を見ると、`出塁率`、`盗塁`、`打点`など、足が必要な成績が第一主成分の係数が大きく、`本塁打`、`二塁打`など、パワーが必要が成績が第二主成分の係数が大きくなっている。
+
+そのことから、野球選手の成績を決める要素の第一主成分は足の速さ、第二主成分はパワーだと考える。
 
 ## ポケモンの個体値の分析
 
-ポケモンのデータには、名義変数として、`abilities`,`classfication`,`name`,`japanese_name`,`is_legendary`,`type1`が、間隔尺度として、`generation`,`pokedex_number`、ほかの変数に大きく依存する変数として、`against_bug`, `against_dark`, `against_dragon`, `against_electric`, `against_fairy`, `against_fight`, `against_fire`, `against_flying`, `against_ghost`, `against_grass`, `against_ground`,`against_ice`, `against_normal`, `against_poison`, `against_psychic`, `against_rock`, `against_steel`, `against_water`が含まれるため、これらのデータを削除し、次の変数で主成分分析を行った。
+ポケモンのデータには、名義変数として、`abilities`、`classfication`、`name`、`japanese_name`、`is_legendary`、`type1`が、
+
+間隔尺度として、`generation`、`pokedex_number`が、
+
+ほかの変数に大きく依存する変数として、`against_bug`、 `against_dark`、 `against_dragon`、 `against_electric`、 `against_fairy`、 `against_fight`、 `against_fire`、 `against_flying`、 `against_ghost`、 `against_grass`、 `against_ground`、`against_ice`、 `against_normal`、 `against_poison`、 `against_psychic`、 `against_rock`、 `against_steel`、 `against_water`が
+
+含まれるため、これらのデータを削除し、次の変数で主成分分析を行った。
 
 - `attack`
 - `base_egg_steps`
@@ -205,16 +219,15 @@ PC5  0.213120 -0.120932 -0.152222  ... -0.401107  0.049583  0.360667
 
 #### 実行結果
 
-今回、入力に使ったデータ、主成分得点、固有値・寄与率・累積寄与率、固有ベクトルを順に示す。
+ソースコード、固有値・寄与率・累積寄与率、主成分得点、固有ベクトルをそれぞれ示す。
 
-[source code](pokemon_analize.py)
-
+[ソースコード](pokemon_analize.py)
 
 <!-- [[[cog
 import cog
 file="output/pokemon_analize.txt"
 cog.outl("\n```bash")
-with open(file,"r") as f:
+with open(file、"r") as f:
     cog.outl(f.read())
 cog.outl("```")
     ]]] -->
@@ -268,12 +281,16 @@ PC5 -0.624965        0.500350        0.066594  ...   0.257282    0.295507 -0.208
 
 [固有ベクトルのすべてのデータ](output/pokemon_component.csv)
 
-また、ポケモンの個体値と各成績を第一・第二主成分でプロットしたものを順に示す。
+また、ポケモンの個体値と各成績を第一・第二主成分でプロットしたものをそれぞれ図5、図6に示す。
 
 ![distribute](output/pokemon_distribute.png)
 
+図5 : 各ポケモンの個体値について第一・第二主成分でプロットしたもの
+
 ![heatvector](output/pokemon_heatvector.png)
 
-ポケモンの個体値と主成分との関係を見ると、`defence`,`attack`,`defense`,`sp_attack`,`sp_defense`,`speed`など攻撃型か防御型かを表す値が第一主成分の係数が大きく、`hp`,`base_happiness`=基礎なつき度、`capture_rate`=捕獲率など、忠誠さを表す値がが第二主成分の係数が大きくなっている。
+図6 : 各個体値について第一・第二主成分でプロットしたもの
+
+ポケモンの個体値と主成分との関係を見ると、`defence`、`attack`、`defense`、`sp_attack`、`sp_defense`、`speed`など攻撃型か防御型かを表す値が第一主成分の係数が大きく、`hp`、`base_happiness`=基礎なつき度、`capture_rate`=捕獲率など、忠誠さを表す値がが第二主成分の係数が大きくなっている。
 
 そのことから、ポケモンの個体値を決める要素の第一主成分は攻撃型か防御型か、第二主成分は忠誠さだと考える。
