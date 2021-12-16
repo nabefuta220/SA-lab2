@@ -52,7 +52,8 @@ def pc_analyze(data: pd.DataFrame, title: str):
 
     # 固有ベクトルを取得する
     component = pd.DataFrame(pca.components_, index=[f"PC{x+1}"
-                                                     for x in range(len(data_std.columns))], columns=data.columns)
+                                                     for x in range(len(data_std.columns))],
+                             columns=data.columns)
     print(f"component:\n{component.head()}")
 
     component.to_csv(f'output/{title}_component.csv', index=True)
