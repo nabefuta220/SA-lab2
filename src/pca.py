@@ -26,6 +26,13 @@ def pc_analyze(data: pd.DataFrame, title: str):
     pca.fit(data_std)
     feat = pca.transform(data_std)
 
+    # 主成分得点を取得する
+    score = pd.DataFrame(feat, columns=[f"PC{x+1}"
+                                        for x in range(len(data_std.columns))])
+    print(f"score:\n{score.head()}")
+    # 主成分をcsvにまとめる
+    score.to_csv(f'output/{title}_score.csv', index=True)
+
     # 固有値、寄与率、累積寄与率をまとめる
     state = pd.DataFrame([pca.explained_variance_, pca.explained_variance_ratio_, list(np.cumsum(
         pca.explained_variance_ratio_))],
@@ -43,11 +50,19 @@ def pc_analyze(data: pd.DataFrame, title: str):
     plt.show()
     fig.savefig(f"output/{title}_distribute.png")
 
+    # 固有ベクトルを取得する
+    component = pd.DataFrame(pca.components_, index=[f"PC{x+1}"
+                                                     for x in range(len(data_std.columns))],
+                             columns=data.columns)
+    print(f"component:\n{component.head()}")
+
+    component.to_csv(f'output/{title}_component.csv', index=True)
     # 固有ベクトルの第一主成分、第二主成分の寄与度を見る
     fig = plt.figure(figsize=(6, 6))
     for x_axis, y_axis, name in zip(pca.components_[0], pca.components_[1], data.columns[1:]):
         plt.text(x_axis, y_axis, name)
     plt.scatter(pca.components_[0], pca.components_[1], alpha=0.8)
+
     plt.grid()
     plt.xlabel("PC1")
     plt.ylabel("PC2")
