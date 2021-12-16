@@ -103,7 +103,7 @@ PC5 -0.301468 -0.086651 -0.061124  ...  0.268566  0.189814 -0.338372
 
 ## プロ野球の個人成績の分析
 
-打撃成績のデータには、まず、名義尺度として、`選手`、`チーム`が、他の比例尺度に大きく関係する変数として`打席`、`試合`、`打数`、`塁打`が含まれるため、それらのデータを除外して主成分分析を行った、
+打撃成績のデータには、まず、名義尺度として、`選手`、`チーム`が、他の比例尺度に大きく関係する変数として`打席`、`試合`、`打数`、`塁打`が含まれるため、それらのデータを除外して主成分分析を行った。
 
 #### 実行結果
 
@@ -186,3 +186,102 @@ PC5  0.213120 -0.120932 -0.152222  ... -0.401107  0.049583  0.360667
 成績と主成分との関係を見ると、`出塁率`、`盗塁`、`打点`など、足が必要な成績がが第一主成分の係数が大きく、`本塁打`、`二塁打`など、パワーが必要が成績が第二主成分の係数が大きくなっている。
 
 そのことから、野球選手の成績の第一主成分は足の速さ、第二主成分はパワーだと考える。
+
+## ポケモンの個体値の分析
+
+ポケモンのデータには、名義変数として、`abilities`,`classfication`,`name`,`japanese_name`,`is_legendary`,`type1`が、間隔尺度として、`generation`,`pokedex_number`、ほかの変数に大きく依存する変数として、`against_bug`, `against_dark`, `against_dragon`, `against_electric`, `against_fairy`, `against_fight`, `against_fire`, `against_flying`, `against_ghost`, `against_grass`, `against_ground`,`against_ice`, `against_normal`, `against_poison`, `against_psychic`, `against_rock`, `against_steel`, `against_water`が含まれるため、これらのデータを削除し、次の変数で主成分分析を行った。
+
+- `attack`
+- `base_egg_steps`
+- `base_happiness`
+- `base_total`
+- `capture_rate`
+- `defense`
+- `experience_growth`
+- `hp`
+- `sp_attack`
+- `sp_defense`
+- `speed`
+
+#### 実行結果
+
+今回、入力に使ったデータ、主成分得点、固有値・寄与率・累積寄与率、固有ベクトルを順に示す。
+
+[source code](pokemon-analize.py)
+
+
+<!-- [[[cog
+import cog
+file="output/pokemon-analize.txt"
+cog.outl("\n```bash")
+with open(file,"r") as f:
+    cog.outl(f.read())
+cog.outl("```")
+    ]]] -->
+
+```bash
+$ pipenv run python3 pokemon-analize.py
+  attack base_egg_steps base_happiness  ... sp_attack sp_defense speed
+0     49           5120             70  ...        65         65    45
+1     62           5120             70  ...        80         80    60
+2    100           5120             70  ...       122        120    80
+3     52           5120             70  ...        60         50    65
+4     64           5120             70  ...        80         65    80
+
+[5 rows x 10 columns]
+data:
+   attack  base_egg_steps  base_happiness  ...  sp_attack  sp_defense  speed
+0    49.0          5120.0            70.0  ...       65.0        65.0   45.0
+1    62.0          5120.0            70.0  ...       80.0        80.0   60.0
+2   100.0          5120.0            70.0  ...      122.0       120.0   80.0
+3    52.0          5120.0            70.0  ...       60.0        50.0   65.0
+4    64.0          5120.0            70.0  ...       80.0        65.0   80.0
+
+[5 rows x 10 columns]
+score:
+        PC1       PC2       PC3  ...       PC8       PC9      PC10
+0 -0.735032  0.039927 -0.070165  ... -0.980489 -0.916745 -0.596271
+1  0.319958 -0.321832 -0.169041  ... -0.515883 -0.586317 -0.376433
+2  3.026808 -1.082753  0.446791  ...  0.084615  0.507171  0.130330
+3 -0.967084  0.176732 -0.789713  ... -1.077591 -0.886046 -0.369526
+4  0.203343 -0.245664 -0.912633  ... -0.605485 -0.522358 -0.044520
+
+[5 rows x 10 columns]
+states:
+      eigenvalue  contribution  contributioin_sum
+PC1     3.161814      0.316181           0.316181
+PC2     1.481909      0.148191           0.464372
+PC3     1.173779      0.117378           0.581750
+PC4     0.986009      0.098601           0.680351
+PC5     0.859388      0.085939           0.766290
+PC6     0.744899      0.074490           0.840780
+PC7     0.514127      0.051413           0.892193
+PC8     0.425257      0.042526           0.934718
+PC9     0.378982      0.037898           0.972616
+PC10    0.273836      0.027384           1.000000
+component:
+       attack  base_egg_steps  base_happiness  ...  sp_attack  sp_defense     speed
+PC1  0.382103        0.235464       -0.132575  ...   0.368410    0.383839  0.226599
+PC2  0.062425        0.492725       -0.631075  ...  -0.169950   -0.224711 -0.103362
+PC3  0.018480        0.048316        0.021564  ...  -0.297496    0.230436 -0.710861
+PC4  0.159192        0.002295        0.408753  ...  -0.173990   -0.259598 -0.193867
+PC5 -0.624965        0.500350        0.066594  ...   0.257282    0.295507 -0.208322
+
+[5 rows x 10 columns]
+
+```
+<!-- [[[end]]] -->
+
+[主成分得点のすべてのデータ](output/pokemon_score.csv)
+
+[固有ベクトルのすべてのデータ](output/pokemon_component.csv)
+
+また、ポケモンの個体値と各成績を第一・第二主成分でプロットしたものを順に示す。
+
+![distribute](output/pokemon_distribute.png)
+
+![heatvector](output/pokemon_heatvector.png)
+
+ポケモンの個体値と主成分との関係を見ると、`defence`,`attack`,`defense`,`sp_attack`,`sp_defense`,`speed`など攻撃型か防御型かを表す値が第一主成分の係数が大きく、`hp`,`base_happiness`=基礎なつき度、`capture_rate`=捕獲率など、忠誠さを表す値がが第二主成分の係数が大きくなっている。
+
+そのことから、ポケモンの個体値を決める要素の第一主成分は攻撃型か防御型か、第二主成分は忠誠さだと考える。
