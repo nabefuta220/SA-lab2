@@ -221,14 +221,6 @@ cog.outl("```")
 
 ```bash
 $ pipenv run python3 pokemon-analize.py
-  attack base_egg_steps base_happiness  ... sp_attack sp_defense speed
-0     49           5120             70  ...        65         65    45
-1     62           5120             70  ...        80         80    60
-2    100           5120             70  ...       122        120    80
-3     52           5120             70  ...        60         50    65
-4     64           5120             70  ...        80         65    80
-
-[5 rows x 10 columns]
 data:
    attack  base_egg_steps  base_happiness  ...  sp_attack  sp_defense  speed
 0    49.0          5120.0            70.0  ...       65.0        65.0   45.0

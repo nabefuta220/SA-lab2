@@ -24,8 +24,6 @@ if __name__ == "__main__":
     #data = pd.get_dummies(data, columns=['type1'])
     data = data[data.is_legendary == '0']
     data = data.drop(columns=['is_legendary'], axis=1)
-    print(data.head())
-    #data = pd.get_dummies(data, columns=['is_legendary'])
     # 欠損値が含まれる行を削除
     data = data.dropna(axis=0).astype('float64')
 
